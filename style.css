@@ -95,6 +95,8 @@ button {
 
 .weather__header h2 {
   font-size: 32px;
+  width: 150px;
+  text-align: right;
 }
 
 .weather__header-inner {
