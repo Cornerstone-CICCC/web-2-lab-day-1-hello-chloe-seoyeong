@@ -17,8 +17,14 @@ body {
   height: 100%;
 }
 
+.weather.night {
+  background-color: #191919;
+  color: #fff;
+}
+
 .weather .weather__header {
-  height: 200px;
+  min-height: 200px;
+  padding: 16px;
   background: url(./images/day.jpg) no-repeat center center;
   background-size: cover;
 }
@@ -43,10 +49,26 @@ body {
   border-bottom: 1px solid #191919;
 }
 
+.weather.weather.night .weather__search input {
+  background-color: #191919;
+  border-color: #fff;
+  color: #fff;
+}
+
+.weather.weather.night .weather__search input::placeholder {
+  color: rgba(255, 255, 255, .5);
+}
+
 button {
   padding: 12px;
   border: 1px solid #191919;
   background: none;
+  cursor: pointer;
+}
+
+.weather.night button {
+  color: #fff;
+  border-color: #fff;
 }
 
 .weather__info {
@@ -68,6 +90,7 @@ button {
 
 .weather__header h1 {
   font-size: 40px;
+  padding-right: 16px;
 }
 
 .weather__header h2 {
@@ -110,6 +133,23 @@ button {
   padding-left: 16px;
   font-weight: 200;
 }
+
 .weather__table .forecast span {
+  display: block;
+}
+
+.weather__wrong {
+  display: none;
+  max-width: 500px;
+  text-align: center;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.weather__wrong p {
+  margin-top: 8px;
+}
+
+.weather__wrong.show {
   display: block;
 }

@@ -1,16 +1,23 @@
 const weather = document.querySelector(".weather");
-
 const weatherForm = document.querySelector(".weather__search");
 const input = weatherForm.querySelector("input");
 const btnSubmit = weatherForm.querySelector("button");
+const weatherInfo = document.querySelector(".weather__info");
 
-const weatherCity = document.querySelector(".weather__city");
-const weatherTemperature = document.querySelector(".weather__temperature");
-const weatherTable = document.querySelector(".weather__table");
-const weatherCountry = weatherTable.querySelector(".country");
-const weatherTimezone = weatherTable.querySelector(".timezone");
-const weatherPopulation = weatherTable.querySelector(".population");
-const weatherForecast = weatherTable.querySelector(".forecast");
+function wrongCity() {
+  const wrong = document.querySelector(".weather__wrong");
+  const infoClass = weatherInfo.classList.contains("show");
+
+  if(infoClass === true) {
+    weatherInfo.classList.remove("show");
+  }
+
+  wrong.classList.add("show");
+  setTimeout(() => {
+    wrong.classList.remove("show");
+    input.value = "";
+  }, 5000)
+}
 
 const searchCity = async (city) => {
   try {
@@ -20,7 +27,7 @@ const searchCity = async (city) => {
 
     return cityInfo;
   } catch(err) {
-    console.error(err);
+    wrongCity();
   }
 }
 
@@ -36,22 +43,42 @@ const searchWeather = async (lat, lon) => {
 }
 
 const buildInfo = async (cityName) => {
+  const weatherCity = document.querySelector(".weather__city");
+  const weatherTemperature = document.querySelector(".weather__temperature");
+  const weatherTable = document.querySelector(".weather__table");
+  const weatherCountry = weatherTable.querySelector(".country");
+  const weatherTimezone = weatherTable.querySelector(".timezone");
+  const weatherPopulation = weatherTable.querySelector(".population");
+  const weatherForecast = weatherTable.querySelector(".forecast");
+
   const cityData = await searchCity(cityName);
   const lat = cityData.latitude;
   const lon = cityData.longitude;
 
   const weatherData = await searchWeather(lat, lon);
 
+console.log(cityData);
+console.log(weatherData);
+  if(cityData.country == undefined) { // example like hong kong
+    weatherCountry.textContent = cityData.name;
+  } else {
+    weatherCountry.textContent = cityData.country;
+  }
+
+  if(cityData.population == undefined) { // example searching IATA code like icn
+    weatherPopulation.textContent = "-";
+  } else {
+    weatherPopulation.textContent = cityData.population.toLocaleString();
+  }
+
   weatherCity.textContent = cityData.name;
-  weatherCountry.textContent = cityData.country;
-  weatherPopulation.textContent = cityData.population.toLocaleString();
   weatherTimezone.textContent = weatherData.timezone;
   weatherTemperature.textContent = `${weatherData.current.temperature_2m} ${weatherData.current_units.temperature_2m}`;
   weatherForecast.firstChild.textContent = `Low: ${weatherData.daily.temperature_2m_min} ${weatherData.current_units.temperature_2m}`;
   weatherForecast.lastChild.textContent = `Max: ${weatherData.daily.temperature_2m_max} ${weatherData.current_units.temperature_2m}`;
 
-console.log(weatherData)
-
+  input.value = "";
+  weatherInfo.classList.add("show");
   changeDayNight(weatherData.current.is_day);
 }
 
@@ -65,7 +92,9 @@ function changeDayNight(day) {
 function handleSubmit(event) {
   event.preventDefault();
   const city = input.value;
-  buildInfo(city);
+  if(input.value !== "") {
+    buildInfo(city);
+  }
 }
 
 weatherForm.addEventListener("submit", handleSubmit);
