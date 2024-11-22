@@ -8,7 +8,35 @@
 </head>
 <body>
   <!-- YOUR CODE HERE -->
-  
+  <div class="weather">
+    <form action="" class="weather__search">
+      <input type="text" placeholder="Write city name">
+      <button type="submit">Search</button>
+    </form>
+    <main class="weather__info show">
+      <div class="weather__header">
+        <div class="weather__header-inner">
+          <h1 class="weather__city"></h1>
+          <h2 class="weather__temperature"></h2>
+        </div>
+      </div>
+      <div class="weather__table">
+        <dl>
+          <dt>Country</dt>
+          <dd class="country"></dd>
+          <dt>Timezone</dt>
+          <dd class="timezone"></dd>
+          <dt>Population</dt>
+          <dd class="population"></dd>
+          <dt>Tomorrow's forecast</dt>
+          <dd class="forecast">
+            <span></span>
+            <span></span>
+          </dd>
+        </dl>
+      </div>
+    </main>
+  </div>
   <script src="./app.js"></script>
 </body>
 </html>

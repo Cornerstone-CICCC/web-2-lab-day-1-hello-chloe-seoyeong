@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Merriweather", serif;
+}
+
+body {
+  height: 100vh;
+}
+
+.weather {
+  width: 100%;
+  height: 100%;
+}
+
+.weather .weather__header {
+  height: 200px;
+  background: url(./images/day.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+.weather.night .weather__header {
+  background-image: url(./images/night.jpg);
+}
+
+.weather__search {
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.weather__search input {
+  width: 200px;
+  padding: 10px;
+  font-size: 20px;
+  border: 0;
+  border-bottom: 1px solid #191919;
+}
+
+button {
+  padding: 12px;
+  border: 1px solid #191919;
+  background: none;
+}
+
+.weather__info {
+  display: none;
+}
+
+.weather__info.show {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.weather__header {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 30px;
+}
+
+.weather__header h1 {
+  font-size: 40px;
+}
+
+.weather__header h2 {
+  font-size: 32px;
+}
+
+.weather__header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+.weather.night .weather__header {
+  color: #fff;
+}
+
+.weather__table {
+  padding: 20px 0;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.weather__table dl {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  font-size: 20px;
+}
+
+.weather__table dt {
+  text-align: right;
+  padding-right: 16px;
+}
+
+.weather__table dd {
+  text-align: left;
+  padding-left: 16px;
+  font-weight: 200;
+}
+.weather__table .forecast span {
+  display: block;
+}
